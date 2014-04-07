@@ -1,0 +1,223 @@
+body {
+	font-family: sans-serif;
+}
+
+.bar {
+	background-color: #2B8AE2;
+	margin-left: 2px;
+	width: 10px;
+	height: 1px;
+	border-style: solid;
+	border-color: #8BBFE7;
+	border-bottom: none;
+	//float: left;
+	display: none;
+	position: absolute; /*for position absolute*/
+	bottom: 2px; /*for position absolute*/
+}
+
+.compare {
+	background-color: #8BC2EE!important;
+}
+
+.swap {
+	background-color: #28C5BF!important;
+}
+
+.highlight {
+	background-color: #AEE496!important;
+}
+
+.pass {
+	background-color: #DDDDDD!important;
+}
+
+.found {
+	background-color: #FFBD47!important;
+}
+
+.pivot {
+	background-color: #FF0000!important;
+}
+
+.pause {
+	opacity: .5;
+}
+
+.timeline {
+    height: 15px;
+    background: #eee;
+    position: absolute;
+    border: 1px solid #fff;
+    overflow: hidden;
+}
+
+.timerun {
+	height: 15px;
+	background: #75D375;
+	width: 0px;
+	margin-left: -2px;
+}
+
+.ui-slider {
+	position: absolute;
+	top: 400px;
+	background: #eee;
+}
+
+.ui-slider-horizontal {
+	width: 600px;
+	height: 10px;
+}
+.ui-slider-vertical  {
+	height: 600px;
+	width: 10px;
+}
+
+.ui-slider-handle {
+	width: 14px;
+	height: 14px;
+	background: #fff;
+	border: 1px solid #eee;
+	position: absolute;
+	margin-top: -3px;
+	box-shadow: 0px 0px 2px #000;
+}
+
+.ui-slider-range {
+	background: green;
+}
+
+.ui-slider-range-min {
+	background: blue;
+} 
+
+.ui-slider-range-max {
+	background: red;
+}
+
+#button_set {
+	position: absolute;
+	top: 389px;
+	left:628px;
+	width: 375px;
+}
+
+.button {
+	background: #eee;
+	//position: absolute;
+	border-radius: 3px;
+	border: 1px solid #fff;
+	box-shadow: 0px 0px 2px #000;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	color: #3D3D3D;
+	cursor: pointer;
+	float: left;
+	margin-left: 10px;
+}
+
+#step {
+	//top: 389px;
+	//left: 628px;
+}
+
+input[name="step"] {
+	padding: 0;
+	margin: 0;
+	margin-right: 5px;
+}
+
+#step_check {
+	padding-left: 10px;
+}
+
+#stop {
+	//top: 389px;
+	//left: 725px;
+}
+
+.button:hover {
+	background: #3d3d3d;
+	color: #eee;
+	border-color: #1b1b1b;
+}
+
+.inactive {
+	cursor: auto;
+	color: #727272;
+	opacity: .5;
+}
+
+.inactive:hover {
+	background: #eee;
+	color: #3D3D3D;
+	border-color: #fff;
+	color: #727272;
+}
+
+.arrow-up,
+.arrow-right,
+.arrow-down,
+.arrow-left {
+  /*
+   * In Internet Explorer, The"border-style: dashed" will never be
+   * rendered unless "(width * 5) >= border-width" is true.
+   * Since "width" is set to "0", the "dashed-border" remains
+   * invisible to the user, which renders the border just like how
+   * "border-color: transparent" renders.
+   */
+  border-style: dashed;
+  border-color: transparent;
+  border-width: 0.53em;
+  display: -moz-inline-box;
+  display: inline-block;
+  /* Use font-size to control the size of the arrow. */
+  font-size: 100px;
+  height: 0;
+  line-height: 0;
+  position: relative;
+  vertical-align: middle;
+  width: 0;
+}
+
+.arrow-up {
+  border-bottom-width: 1em;
+  border-bottom-style: solid;
+  border-bottom-color: #666;
+  bottom: 0.25em;
+}
+
+.arrow-right {
+  border-left-width: 1em;
+  border-left-style: solid;
+  border-left-color: #666;
+  left: 0.25em;
+}
+
+.arrow-down {
+  border-top-width: 1em;
+  border-top-style: solid;
+  border-top-color: #666;
+  top: 0.25em;
+}
+
+.arrow-left {
+  border-right-width: 1em;
+  border-right-style: solid;
+  border-right-color: #666;
+  right: 0.25em;
+}	 
+
+/*axis : '#000', 
+			background : 'none', 
+			border : 'none', 
+			fill : '#2B8AE2', 
+			fillBorder : 'none', 
+			highlight : '#8BC2EE', 
+			compared : '#8BC2EE', 
+			accepted : '#28C5BF', 
+			declined : '#FF0000'
+*/
