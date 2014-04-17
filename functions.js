@@ -3126,7 +3126,7 @@ function registerForm(){
 			}
 			else {
 				if(isValidUsername($('#username.register_field').val())){
-					base_ajax_call(true, {requested: 'checkUser', userName: $('#username.register_field').val()}, function(obj){
+					base_ajax_call(true, {requested: 'checkName', userName: $('#username.register_field').val()}, function(obj){
 						if(obj === -1){
 							$('label[for="username"]').fadeOut(function(){
 								$('label[for="username"]').remove();
