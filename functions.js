@@ -759,7 +759,7 @@ function runAlgorithms(type){
 					'<div id="bubble_btn" class="standard_btns multi_select">Ταξινόμηση φυσαλίδας</div>'+
 					'<div id="insertion_btn" class="standard_btns multi_select">Απευθείας εισαγωγή</div>'+
 					'<div id="selection_btn" class="standard_btns multi_select">Απευθείας επιλογή</div>'+
-					'<div id="quick_btn" class="standard_btns multi_select">Γρήγορη αναζήτηση</div>'+
+					'<div id="quick_btn" class="standard_btns multi_select">Γρήγορη ταξινόμηση</div>'+
 				'</div>'+
 				'<div id="run_sorting_data" class="_1 run_alg_container">'+
 					'<h2>Όρισε τα δεδομένα:</h2>'+
