@@ -444,7 +444,7 @@ function enterSite(type, parameter){
 				'<div id="containers">'+
 					'<div id="run_container" class="content_container_wrapper_container"></div>'+
 					'<div id="gallery_container" class="content_container_wrapper_container">'+
-						'<div id="gallery_content" class="styled_content">'+
+						'<div id="gallery_content" class="styled_content gallery_styled">'+
 							'<div id="gallery_menu">'+
 							'</div>'+
 						'</div>'+
@@ -722,7 +722,7 @@ function runAlgorithms(type){
 	/*Variable to keep maximum allowed numbers*/
 	var maxNum = maxLengthOfVis(1);
 	if(type === 'search'){
-		$('#run_container').append('<div id="run_content" class="styled_content">'+
+		$('#run_container').append('<div id="run_content" class="styled_content run_styled">'+
 			'<div id="run_content_container" class="_1 column">'+
 				'<div id="run_searching_algs" class="_1 run_alg_container">'+
 					'<h2>Επέλεξε αλγόριθμο:</h2>'+
@@ -752,7 +752,7 @@ function runAlgorithms(type){
 		'</div>');
 	}
 	else if(type === 'sort'){
-		$('#run_container').append('<div id="run_content" class="styled_content sorting_content">'+
+		$('#run_container').append('<div id="run_content" class="styled_content run_styled sorting_content">'+
 			'<div id="run_content_container" class="_1 column">'+
 				'<div id="run_sorting_algs" class="_1 run_alg_container">'+
 					'<h2>Επέλεξε αλγόριθμο:</h2>'+
@@ -1584,7 +1584,7 @@ function runVisualization(algorithms, history, array, steps, type){
 	$('#visualization_controls').off('click', '#close_btn');
 	$('#visualization_controls').on('click', '#close_btn', function(){
 		$('#run_content').animate({
-			marginTop : '15px'
+			marginTop : '35px'
 		});
 		$('#visualization_container').hide('clip', function(){
 			$(this).remove();
@@ -1717,8 +1717,15 @@ function loadAlgorithms(type){
 }
 
 function loadAlgorithmsAnalysis(){
-	if($('.gallery_content_container')[0]){
+	/*if($('.gallery_content_container')[0]){
 		$('.gallery_content_container').remove();
+	}*/
+	if($('.gallery_content_container')[0]){
+		$('.gallery_content_container').hide();
+		$('.gallery_content_container').hide('drop',{direction: 'down'},350, function(){
+			$(this).remove();
+			$('#gallery_container').css('overflow', 'hidden');
+		});
 	}
 	var hash = window.location.hash.split('/');
 	var selected = '';
@@ -1741,102 +1748,130 @@ function loadAlgorithmsAnalysis(){
 		switch(selected){
 			case 'linear':
 				$('#gallery_menu').after('<div id="linear_analysis" class="gallery_content_container">'+
-					'<div id="gallery_visualization">'+
-						'<div class="gallery_line"></div>'+
-						'<img src="img/linearSearch.gif">'+
+					'<div class="gallery_content gallery_content_analysis">'+
+						'<div id="gallery_visualization">'+
+							'<div class="gallery_line"></div>'+
+							'<img src="img/linearSearch.gif">'+
+						'</div>'+
+						'<p>Ο αλγόριθμος σειριακής αναζήτησης είναι ο πιο απλός αλγόριθμος '+
+						'αναζήτησης.<br><br> Από πλευράς μεθοδολογίας ανήκει στους αλγόριθμους ωμής βίας και ο '+
+						'τρόπος λειτουργίας του είναι πως ελέγχει ένα-ένα το κάθε στοιχείο μέχρι να εντοπίσει '+
+						'το ζητούμενο, οπότε και ολοκληρώνεται η αναζήτηση.<br><br> Αν ολοκληρωθεί η '+
+						'προσπέλαση όλων των στοιχείων χωρίς να βρεθεί το ζητούμενο στοιχείο, τότε η '+
+						'αναζήτηση θεωρείται ανεπιτυχής.<br><br> '+
+						'Ο τρόπος λειτουργίας του αλγόριθμου σειριακής αναζήτησης τον καθιστά '+
+						'ιδιαίτερα αργό στην περίπτωση που τα στοιχεία στα οποία θα γίνει η αναζήτηση είναι '+
+						'πολλά. </p>'+
 					'</div>'+
-					'<p>Ο αλγόριθμος σειριακής αναζήτησης είναι ο πιο απλός αλγόριθμος '+
-					'αναζήτησης.<br><br> Από πλευράς μεθοδολογίας ανήκει στους αλγόριθμους ωμής βίας και ο '+
-					'τρόπος λειτουργίας του είναι πως ελέγχει ένα-ένα το κάθε στοιχείο μέχρι να εντοπίσει '+
-					'το ζητούμενο, οπότε και ολοκληρώνεται η αναζήτηση.<br><br> Αν ολοκληρωθεί η '+
-					'προσπέλαση όλων των στοιχείων χωρίς να βρεθεί το ζητούμενο στοιχείο, τότε η '+
-					'αναζήτηση θεωρείται ανεπιτυχής.<br><br> '+
-					'Ο τρόπος λειτουργίας του αλγόριθμου σειριακής αναζήτησης τον καθιστά '+
-					'ιδιαίτερα αργό στην περίπτωση που τα στοιχεία στα οποία θα γίνει η αναζήτηση είναι '+
-					'πολλά. </p>'+
 				'</div>');
+				$('.gallery_content_container').show('drop',{direction: 'down'},250, function(){
+					$('#gallery_container').css('overflow', 'auto');
+				});
 				break;
 			case 'binary':
 				$('#gallery_menu').after('<div id="binary_analysis" class="gallery_content_container">'+
-					'<div id="gallery_visualization">'+
-						'<div class="gallery_line"></div>'+
-						'<img src="img/binarySearch.gif">'+
+					'<div class="gallery_content gallery_content_analysis">'+
+						'<div id="gallery_visualization">'+
+							'<div class="gallery_line"></div>'+
+							'<img src="img/binarySearch.gif">'+
+						'</div>'+
+						'<p>Ο αλγόριθμος δυαδικής αναζήτησης πραγματοποιεί την αναζήτηση του '+
+						'ζητούμενου στοιχείου ανάμεσα σε ταξινομημένα στοιχεία.<br><br> Αυτό δίνει την δυνατότητα '+
+						'στον αλγόριθμο να αναζητήσει στοιχεία επιλεκτικά και όχι σειριακά με αποτέλεσμα '+
+						'να αυξάνει κατακόρυφα τις επιδόσεις του. <br><br>'+
+						'Αναλυτικά, ο τρόπος λειτουργίας του είναι ο εξής, αρχικά ελέγχεται το μεσαίο '+
+						'στοιχείο για να διαπιστωθεί αν είναι ή όχι το ζητούμενο.<br><br> Αν είναι τότε η αναζήτηση '+
+						'έχει ολοκληρωθεί, αν όχι, με βάση το αποτέλεσμα της σύγκρισης ζητούμενου με '+
+						'μεσαίου στοιχείου (μεγαλύτερο ή μικρότερο), ο μισός πίνακας εξαιρείται και η '+
+						'αναζήτηση συνεχίζει με τον ίδιο τρόπο στον άλλο μισό.<br><br> Η διαδικασία αυτή '+
+						'επαναλαμβάνεται μέχρι να εντοπισθεί το ζητούμενο στοιχείο ή να διαπιστωθεί πως '+
+						'δεν υπάρχει. <br><br>'+
+						'Από μαθηματικής απόψεως ο αλγόριθμος αυτός είναι αρκετά προβλέψιμος '+
+						'και σταθερός, αφού η επίδοσή του συνήθως είναι πολύ κοντά στη μέση τιμή των '+
+						'συγκρίσεων. </p>'+
 					'</div>'+
-					'<p>Ο αλγόριθμος δυαδικής αναζήτησης πραγματοποιεί την αναζήτηση του '+
-					'ζητούμενου στοιχείου ανάμεσα σε ταξινομημένα στοιχεία.<br><br> Αυτό δίνει την δυνατότητα '+
-					'στον αλγόριθμο να αναζητήσει στοιχεία επιλεκτικά και όχι σειριακά με αποτέλεσμα '+
-					'να αυξάνει κατακόρυφα τις επιδόσεις του. <br><br>'+
-					'Αναλυτικά, ο τρόπος λειτουργίας του είναι ο εξής, αρχικά ελέγχεται το μεσαίο '+
-					'στοιχείο για να διαπιστωθεί αν είναι ή όχι το ζητούμενο.<br><br> Αν είναι τότε η αναζήτηση '+
-					'έχει ολοκληρωθεί, αν όχι, με βάση το αποτέλεσμα της σύγκρισης ζητούμενου με '+
-					'μεσαίου στοιχείου (μεγαλύτερο ή μικρότερο), ο μισός πίνακας εξαιρείται και η '+
-					'αναζήτηση συνεχίζει με τον ίδιο τρόπο στον άλλο μισό.<br><br> Η διαδικασία αυτή '+
-					'επαναλαμβάνεται μέχρι να εντοπισθεί το ζητούμενο στοιχείο ή να διαπιστωθεί πως '+
-					'δεν υπάρχει. <br><br>'+
-					'Από μαθηματικής απόψεως ο αλγόριθμος αυτός είναι αρκετά προβλέψιμος '+
-					'και σταθερός, αφού η επίδοσή του συνήθως είναι πολύ κοντά στη μέση τιμή των '+
-					'συγκρίσεων. </p>'+
 				'</div>');
+				$('.gallery_content_container').show('drop',{direction: 'down'},250, function(){
+					$('#gallery_container').css('overflow', 'auto');
+				});
 				break;
 			case 'bubble':
 				$('#gallery_menu').after('<div id="bubble_analysis" class="gallery_content_container">'+
-					'<div id="gallery_visualization">'+
-						'<div class="gallery_line"></div>'+
-						'<img src="img/bubbleSort.gif">'+
+					'<div class="gallery_content gallery_content_analysis">'+
+						'<div id="gallery_visualization">'+
+							'<div class="gallery_line"></div>'+
+							'<img src="img/bubbleSort.gif">'+
+						'</div>'+
+						'<p>Είναι ένας απλός αλγόριθμος ταξινόμησης που λειτουργεί συγκρίνοντας τα '+
+						'στοιχεία ανά ζευγάρια και εναλλάσσοντάς τα θέση μέχρι όλα τα στοιχεία να είναι '+
+						'σωστά ταξινομημένα.</br></br> Η ονομασία του προέρχεται από τον τρόπο με τον οποίο '+
+						'λειτουργεί, τα μεγαλύτερα στοιχεία μετακινούνται προς το τέλος, όπως οι φυσαλίδες '+
+						'που αναδύονται στην επιφάνεια. '+
+						'</p>'+
 					'</div>'+
-					'<p>Είναι ένας απλός αλγόριθμος ταξινόμησης που λειτουργεί συγκρίνοντας τα '+
-					'στοιχεία ανά ζευγάρια και εναλλάσσοντάς τα θέση μέχρι όλα τα στοιχεία να είναι '+
-					'σωστά ταξινομημένα.</br></br> Η ονομασία του προέρχεται από τον τρόπο με τον οποίο '+
-					'λειτουργεί, τα μεγαλύτερα στοιχεία μετακινούνται προς το τέλος, όπως οι φυσαλίδες '+
-					'που αναδύονται στην επιφάνεια. '+
-					'</p>'+
 				'</div>');
+				$('.gallery_content_container').show('drop',{direction: 'down'},250);
 				break;
 			case 'insertion':
 				$('#gallery_menu').after('<div id="insertion_analysis" class="gallery_content_container">'+
-					'<div id="gallery_visualization">'+
-						'<div class="gallery_line"></div>'+
-						'<img src="img/insertionSort.gif">'+
+					'<div class="gallery_content gallery_content_analysis">'+
+						'<div id="gallery_visualization">'+
+							'<div class="gallery_line"></div>'+
+							'<img src="img/insertionSort.gif">'+
+						'</div>'+
+						'<p>Είναι ένας απλός αλγόριθμος που ταξινομεί τα στοιχεία ένα - ένα τη φορά έως '+
+						'ότου είναι όλα ταξινομημένα.<br><br> Η λογική που ακολουθεί είναι πως συγκρίνει το κάθε '+
+						'στοιχείο, ξεκινώντας απ’ το δεύτερο, με τα προηγούμενά του και το τοποθετεί στη '+
+						'σωστή θέση.<br><br> Είναι γρηγορότερος από την ταξινόμηση φυσαλίδας και την ταξινόμηση '+
+						'με απευθείας επιλογή αλλά υστερεί συγκριτικά με τη γρήγορη ταξινόμηση.'+
+						'<p>'+
 					'</div>'+
-					'<p>Είναι ένας απλός αλγόριθμος που ταξινομεί τα στοιχεία ένα - ένα τη φορά έως '+
-					'ότου είναι όλα ταξινομημένα.<br><br> Η λογική που ακολουθεί είναι πως συγκρίνει το κάθε '+
-					'στοιχείο, ξεκινώντας απ’ το δεύτερο, με τα προηγούμενά του και το τοποθετεί στη '+
-					'σωστή θέση.<br><br> Είναι γρηγορότερος από την ταξινόμηση φυσαλίδας και την ταξινόμηση '+
-					'με απευθείας επιλογή αλλά υστερεί συγκριτικά με τη γρήγορη ταξινόμηση.'+
-					'<p>'+
 				'</div>');
+				$('.gallery_content_container').show('drop',{direction: 'down'},250, function(){
+					$('#gallery_container').css('overflow', 'auto');
+				});
 				break;
 			case 'selection':
 				$('#gallery_menu').after('<div id="selection_analysis" class="gallery_content_container">'+
-					'<div id="gallery_visualization">'+
-						'<div class="gallery_line"></div>'+
-						'<img src="img/selectionSort.gif">'+
+					'<div class="gallery_content gallery_content_analysis">'+
+						'<div id="gallery_visualization">'+
+							'<div class="gallery_line"></div>'+
+							'<img src="img/selectionSort.gif">'+
+						'</div>'+
+						'<p>Η λειτουργία του αλγορίθμου είναι απλή και η λογική που ακολουθεί είναι να '+
+						'χωρίζει τα δεδομένα σε δύο κατηγορίες, αυτά που έχουν ήδη ταξινομηθεί και σε αυτά '+
+						'που απομένουν να ταξινομηθούν, σε κάθε επανάληψη το μικρότερο από τα μη '+
+						'ταξινομημένα τοποθετείται στο τέλος των ταξινομημένων. '+
+						'</p>'+
 					'</div>'+
-					'<p>Η λειτουργία του αλγορίθμου είναι απλή και η λογική που ακολουθεί είναι να '+
-					'χωρίζει τα δεδομένα σε δύο κατηγορίες, αυτά που έχουν ήδη ταξινομηθεί και σε αυτά '+
-					'που απομένουν να ταξινομηθούν, σε κάθε επανάληψη το μικρότερο από τα μη '+
-					'ταξινομημένα τοποθετείται στο τέλος των ταξινομημένων. '+
-					'</p>'+
 				'</div>');
+				$('.gallery_content_container').show('drop',{direction: 'down'},250, function(){
+					$('#gallery_container').css('overflow', 'auto');
+				});
 				break;
 			case 'quick':
 				$('#gallery_menu').after('<div id="quick_analysis" class="gallery_content_container">'+
-					'<div id="gallery_visualization">'+
-						'<div class="gallery_line"></div>'+
-						'<img src="img/quickSort.gif">'+
+					'<div class="gallery_content gallery_content_analysis">'+
+						'<div id="gallery_visualization">'+
+							'<div class="gallery_line"></div>'+
+							'<img src="img/quickSort.gif">'+
+						'</div>'+
+						'<p>Ο αλγόριθμος γρήγορης ταξινόμησης είναι ένας από τους πιο γρήγορους '+
+						'αλγόριθμους ταξινόμησης.<br><br> Από πλευράς μεθοδολογίας ανήκει στους αλγόριθμους '+
+						'διαίρει και βασίλευε και ο τρόπος λειτουργίας του είναι πως αρχικά επιλέγει ένα '+
+						'στοιχείο ως στοιχείο αναφοράς και τοποθετεί όλα τα μεγαλύτερα στοιχεία δεξιά του '+
+						'και όλα τα μικρότερα αριστερά του.<br><br> Τώρα ο πίνακας προς ταξινόμηση έχει '+
+						'απλοποιηθεί σε δύο μικρότερους υποπίνακες, στους οποίους ακολουθείται πάλι η ίδια '+
+						'τακτική με αποτέλεσμα ακόμα μικρότερους υποπίνακες κ.ο.κ., αυτή η διαδικασία '+
+						'συνεχίζεται έως ότου ο υποπίνακας που προκύπτει να αποτελείται από ένα μόνο '+
+						'στοιχείο.<br><br> Όταν όλοι οι υποπίνακες έχουν ταξινομηθεί, τότε και τα αρχικά στοιχεία '+
+						'είναι ταξινομημένα. '+
+						'<p>'+
 					'</div>'+
-					'<p>Ο αλγόριθμος γρήγορης ταξινόμησης είναι ένας από τους πιο γρήγορους '+
-					'αλγόριθμους ταξινόμησης.<br><br> Από πλευράς μεθοδολογίας ανήκει στους αλγόριθμους '+
-					'διαίρει και βασίλευε και ο τρόπος λειτουργίας του είναι πως αρχικά επιλέγει ένα '+
-					'στοιχείο ως στοιχείο αναφοράς και τοποθετεί όλα τα μεγαλύτερα στοιχεία δεξιά του '+
-					'και όλα τα μικρότερα αριστερά του.<br><br> Τώρα ο πίνακας προς ταξινόμηση έχει '+
-					'απλοποιηθεί σε δύο μικρότερους υποπίνακες, στους οποίους ακολουθείται πάλι η ίδια '+
-					'τακτική με αποτέλεσμα ακόμα μικρότερους υποπίνακες κ.ο.κ., αυτή η διαδικασία '+
-					'συνεχίζεται έως ότου ο υποπίνακας που προκύπτει να αποτελείται από ένα μόνο '+
-					'στοιχείο.<br><br> Όταν όλοι οι υποπίνακες έχουν ταξινομηθεί, τότε και τα αρχικά στοιχεία '+
-					'είναι ταξινομημένα. '+
-					'<p>'+
 				'</div>');
+				$('.gallery_content_container').show('drop',{direction: 'down'},250, function(){
+					$('#gallery_container').css('overflow', 'auto');
+				});
 				break;
 		}
 	}
@@ -1844,134 +1879,164 @@ function loadAlgorithmsAnalysis(){
 		switch(selected){
 			case 'linear':
 				$('#gallery_menu').after('<div id="linear_analysis" class="gallery_content_container">'+
-					'<pre class="linear_code">function linearSearch(linear_array, target){	'+
-						'<br>	var length = linear_array.length;'+
-						'<br>	var found = false;'+
-						'<br>	for(var i = 0; i < length; ++i){'+
-							'<br>		if (linear_array[i] == target){'+
-								'<br>			found = true;'+
-								'<br>			break;'+
-							'<br>		}'+
-						'<br>	}'+
-						
-						'<br>	return found;'+
-					'<br>};</pre>'+
+					'<div class="gallery_content">'+
+						'<pre class="linear_code">function linearSearch(linear_array, target){	'+
+							'<br>	var length = linear_array.length;'+
+							'<br>	var found = false;'+
+							'<br>	for(var i = 0; i < length; ++i){'+
+								'<br>		if (linear_array[i] == target){'+
+									'<br>			found = true;'+
+									'<br>			break;'+
+								'<br>		}'+
+							'<br>	}'+
+							
+							'<br>	return found;'+
+						'<br>};</pre>'+
+					'</div>'+
 				'</div>');
+				$('.gallery_content_container').show('drop',{direction: 'down'},250, function(){
+					$('#gallery_container').css('overflow', 'auto');
+				});
 				break;
 			case 'binary':
 				$('#gallery_menu').after('<div id="binary_analysis" class="gallery_content_container">'+
-					'<pre class="binary_code">var found = binarySearch(binary_array, target, start, end);'+
-					
-					'<br>return found;'+
-					
-					'<br>function binarySearch(array, target, start, end){'+
-					'<br>	var middle = Math.floor(0.5 * (start + end));'+
-					'<br>	if (start > end){ '+
-					'<br>		return false; '+
-					'<br>	}'+
-					
-					'<br>	if (value > target){'+
-					'<br>		return bSearch(array, target, start, middle-1); '+
-					'<br>	}'+
-					'<br>	if (value < target){'+
-					'<br>		return bSearch(array, target, middle+1, end); '+
-					'<br>	}'+
+					'<div class="gallery_content">'+
+						'<pre class="binary_code">var found = binarySearch(binary_array, target, start, end);'+
+						
+						'<br>return found;'+
+						
+						'<br>function binarySearch(array, target, start, end){'+
+						'<br>	var middle = Math.floor(0.5 * (start + end));'+
+						'<br>	if (start > end){ '+
+						'<br>		return false; '+
+						'<br>	}'+
+						
+						'<br>	if (value > target){'+
+						'<br>		return bSearch(array, target, start, middle-1); '+
+						'<br>	}'+
+						'<br>	if (value < target){'+
+						'<br>		return bSearch(array, target, middle+1, end); '+
+						'<br>	}'+
 
-					'<br>	return middle;'+
-					'<br>};</pre>'+
+						'<br>	return middle;'+
+						'<br>};</pre>'+
+					'</div>'+
 				'</div>');
+				$('.gallery_content_container').show('drop',{direction: 'down'},250, function(){
+					$('#gallery_container').css('overflow', 'auto');
+				});
 				break;
 			case 'bubble':
 				$('#gallery_menu').after('<div id="bubble_analysis" class="gallery_content_container">'+
-					'<pre class="bubble_code">function bubbleSort(bubble_array){'+
-					'<br>	var length = bubble_array.length;'+
-					'<br>	for(var i = length - 1; 0 < i; i--){'+
-					'<br>		for(var j = 0; j < i; j++){'+
-					'<br>			if(j > j + 1)){'+
-					'<br>				var temp = bubble_array[j];'+
-					'<br>				bubble_array[j] = bubble_array[j + 1];'+
-					'<br>				bubble_array[j + 1] = temp;'+
-					'<br>			}'+
-					'<br>		}'+
-					'<br>	}'+
-					'<br>	return bubble_array;'+
-					'<br>};</pre>'+
+					'<div class="gallery_content">'+
+						'<pre class="bubble_code">function bubbleSort(bubble_array){'+
+						'<br>	var length = bubble_array.length;'+
+						'<br>	for(var i = length - 1; 0 < i; i--){'+
+						'<br>		for(var j = 0; j < i; j++){'+
+						'<br>			if(j > j + 1)){'+
+						'<br>				var temp = bubble_array[j];'+
+						'<br>				bubble_array[j] = bubble_array[j + 1];'+
+						'<br>				bubble_array[j + 1] = temp;'+
+						'<br>			}'+
+						'<br>		}'+
+						'<br>	}'+
+						'<br>	return bubble_array;'+
+						'<br>};</pre>'+
+					'</div>'+
 				'</div>');
+				$('.gallery_content_container').show('drop',{direction: 'down'},250, function(){
+					$('#gallery_container').css('overflow', 'auto');
+				});
 				break;
 			case 'insertion':
 				$('#gallery_menu').after('<div id="insertion_analysis" class="gallery_content_container">'+
-					'<pre class="insertion_code">function straightInsertion(insertion_array){'+
-					'<br>	var length = insertion_array.length;        '+               
-					'<br>	for (var i = 1; i < length; i++){'+
-					'<br>		for(var j = i; 0 < j; j--){'+
-					'<br>			if(j - 1  > j)){'+
-					'<br>				var temp = insertion_array[j - 1];'+
-					'<br>				insertion_array[j - 1] = insertion_array[j];'+
-					'<br>				insertion_array[j] = temp;'+
-					'<br>			}'+
-					'<br>		}'+
-					'<br>	}	'+
-					'<br>	return insertion_array;'+
-					'<br>};</pre>'+
+					'<div class="gallery_content">'+
+						'<pre class="insertion_code">function straightInsertion(insertion_array){'+
+						'<br>	var length = insertion_array.length;        '+               
+						'<br>	for (var i = 1; i < length; i++){'+
+						'<br>		for(var j = i; 0 < j; j--){'+
+						'<br>			if(j - 1  > j)){'+
+						'<br>				var temp = insertion_array[j - 1];'+
+						'<br>				insertion_array[j - 1] = insertion_array[j];'+
+						'<br>				insertion_array[j] = temp;'+
+						'<br>			}'+
+						'<br>		}'+
+						'<br>	}	'+
+						'<br>	return insertion_array;'+
+						'<br>};</pre>'+
+					'</div>'+
 				'</div>');
+				$('.gallery_content_container').show('drop',{direction: 'down'},250, function(){
+					$('#gallery_container').css('overflow', 'auto');
+				});
 				break;
 			case 'selection':
 				$('#gallery_menu').after('<div id="selection_analysis" class="gallery_content_container">'+
-					'<pre class="selection_code">function straightSelection(selection_array){'+
-					'<br>	var length = selection_array.length;'+
-					'<br>	for (var i = 0; i < length - 1; i++){'+
-					'<br>		var minIndex = i;'+
-					'<br>		for (var j = i + 1; j < length; j++){'+
-					'<br>			var oldMinIndex = minIndex;'+
-					'<br>			if (minIndex > j){'+
-					'<br>				minIndex = j;'+
-					'<br>			}'+
-					'<br>		}'+
-					'<br>		if (minIndex != i){'+
-					'<br>			if(i > minIndex)){'+
-					'<br>				var temp = selection_array[j];'+
-					'<br>				selection_array[j] = selection_array[j + 1];'+
-					'<br>				selection_array[j + 1] = temp;'+
-					'<br>			}'+
-					'<br>		}'+
-					'<br>	}	'+
-					'<br>	return selection_array;'+
-					'<br>};</pre>'+
+					'<div class="gallery_content">'+
+						'<pre class="selection_code">function straightSelection(selection_array){'+
+						'<br>	var length = selection_array.length;'+
+						'<br>	for (var i = 0; i < length - 1; i++){'+
+						'<br>		var minIndex = i;'+
+						'<br>		for (var j = i + 1; j < length; j++){'+
+						'<br>			var oldMinIndex = minIndex;'+
+						'<br>			if (minIndex > j){'+
+						'<br>				minIndex = j;'+
+						'<br>			}'+
+						'<br>		}'+
+						'<br>		if (minIndex != i){'+
+						'<br>			if(i > minIndex)){'+
+						'<br>				var temp = selection_array[j];'+
+						'<br>				selection_array[j] = selection_array[j + 1];'+
+						'<br>				selection_array[j + 1] = temp;'+
+						'<br>			}'+
+						'<br>		}'+
+						'<br>	}	'+
+						'<br>	return selection_array;'+
+						'<br>};</pre>'+
+					'</div>'+
 				'</div>');
+				$('.gallery_content_container').show('drop',{direction: 'down'},250, function(){
+					$('#gallery_container').css('overflow', 'auto');
+				});
 				break;
 			case 'quick':
 				$('#gallery_menu').after('<div id="quick_analysis" class="gallery_content_container">'+
-					'<pre class="quick_code">qsort(quick_array, 0, end);'+
-					'<br>function qsort(array, begin, end){'+
-					'<br>	if(end > begin){'+
-					'<br>		var pivot = Math.floor(0.5 * (begin + end));'+
-					'<br>		var piv = array[pivot];'+
-					'<br>		var i = begin;'+
-					'<br>		var j = end;'+
-					'<br>		while (i <= j) {'+
-					'<br>			while (piv > array[i]){	'+
-					'<br>				i++;'+
-					'<br>			}'+
-					'<br>			while (array[j] > piv){'+
-					'<br>				j--;'+
-					'<br>			}'+
-					'<br>			if (i <= j){'+
-					'<br>				var temp = array[i];'+
-					'<br>				insertion_array[i] = insertion_array[j];'+
-					'<br>				insertion_array[j] = temp;'+
-					'<br>				i++;'+
-					'<br>				j--;'+
-					'<br>			}'+
-					'<br>		}'+
-					'<br>		if (begin < i - 1){'+
-					'<br>			qsort(array, begin, i - 1);'+
-					'<br>		}'+
-					'<br>		if (i < end){'+
-					'<br>			qsort(array, i, end);'+
-					'<br>		}			'+
-					'<br>	}'+
-					'<br>}</pre>'+
+					'<div class="gallery_content">'+
+						'<pre class="quick_code">qsort(quick_array, 0, end);'+
+						'<br>function qsort(array, begin, end){'+
+						'<br>	if(end > begin){'+
+						'<br>		var pivot = Math.floor(0.5 * (begin + end));'+
+						'<br>		var piv = array[pivot];'+
+						'<br>		var i = begin;'+
+						'<br>		var j = end;'+
+						'<br>		while (i <= j) {'+
+						'<br>			while (piv > array[i]){	'+
+						'<br>				i++;'+
+						'<br>			}'+
+						'<br>			while (array[j] > piv){'+
+						'<br>				j--;'+
+						'<br>			}'+
+						'<br>			if (i <= j){'+
+						'<br>				var temp = array[i];'+
+						'<br>				insertion_array[i] = insertion_array[j];'+
+						'<br>				insertion_array[j] = temp;'+
+						'<br>				i++;'+
+						'<br>				j--;'+
+						'<br>			}'+
+						'<br>		}'+
+						'<br>		if (begin < i - 1){'+
+						'<br>			qsort(array, begin, i - 1);'+
+						'<br>		}'+
+						'<br>		if (i < end){'+
+						'<br>			qsort(array, i, end);'+
+						'<br>		}			'+
+						'<br>	}'+
+						'<br>}</pre>'+
+					'</div>'+
 				'</div>');
+				$('.gallery_content_container').show('drop',{direction: 'down'},250, function(){
+					$('#gallery_container').css('overflow', 'auto');
+				});
 				break;
 		}
 		$('pre.'+selected+'_code').snippet("javascript",{style:"ide-codewarrior",transparent:true,showNum:true});
@@ -2514,7 +2579,7 @@ function loadTimeChart(data){
 	var tableData = [['Algorithms', 'Μέσος χρόνος εκτέλεσης (ms)']];
 	var i = 1;
 	$.each(data.averageGeneral, function(index,value){
-		tableData[i] = [index,parseInt(value.timeAverage)];
+		tableData[i] = [index,Number(value.timeAverage.toFixed(2))];
 		i++;
 	});
     function drawChart() {
@@ -2537,7 +2602,7 @@ function loadTimeByNumChart(data){
 	var i = 1;
 	$.each(data.averageDataSteps, function(index,value){
 		$.each(value, function(index1,value1){
-			tableData[i] = [index1,parseInt(value1[0])];
+			tableData[i] = [index1,Number(value1[0].toFixed(2))];
 			i++;
 		});
 	});

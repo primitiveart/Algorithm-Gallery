@@ -589,6 +589,10 @@ input[type="submit"].login_form_tip, input[type="submit"].register_form_tip {
     overflow: hidden;
 }
 
+.run_styled {
+	margin-top: 35px;
+}
+
 #run_content {
 	width: 345px;
 }
@@ -928,10 +932,13 @@ textarea.run_field {
 	position: absolute;
 }
 
-.stats_styled {
+.stats_styled, .gallery_styled {
 	background: none;
 	border: none;
 	box-shadow: none;
+}
+
+.stats_styled {
 	min-height: 850px;
 }
 
@@ -1056,10 +1063,23 @@ textarea.run_field {
     padding-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
+	display: none;
 }
 
 .stats_content_container {
 	display:none;
+}
+
+.gallery_content, .stats_content {
+	background: #FFF;
+	border: 1px solid #EEE;
+	box-shadow: 0 1px 0 #ECE9E9;
+	border-radius: 5px;
+	margin-top: 10px;
+}
+
+.gallery_content_analysis {
+	padding: 10px;
 }
 
 #gallery_visualization {
@@ -1088,8 +1108,17 @@ textarea.run_field {
 	border: 5px solid #FFF;
 }
 
-.gallery_content_container > p, .stats_content_container > p {
+.gallery_content_container > p, .stats_content_container > p,
+	.gallery_content > p, .stats_content > p {
     width: 650px;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 35px;
+	text-align: justify;
+}
+
+.snippet-container {
+	width: 650px;
 	margin: auto;
 	margin-top: 20px;
 	margin-bottom: 35px;
