@@ -412,11 +412,11 @@ function enterSite(type, parameter){
 					'<div id="header_menu_algorithms">'+
 						'<ul id="header_menu_algorithms_list" class="header_menu_list">'+
 							'<li id="header_search">'+
-								'<p>Αλγόριθοι</p>'+
+								'<p>Αλγόριθμοι</p>'+
 								'<p>αναζήτησης</p>'+
 							'</li>'+
 							'<li class="hidden" id="header_sort">'+
-								'<p>Αλγόριθοι</p>'+
+								'<p>Αλγόριθμοι</p>'+
 								'<p>ταξινόμησης</p>'+
 							'</li>'+
 						'</ul>'+
