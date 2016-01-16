@@ -1,4 +1,4 @@
-#Algorithm Gallery
+﻿#Algorithm Gallery
 #
 
 Algorithm Gallery is a web application designed and developed by me as part of my thesis. The goal was the development of a useful, interactive and fully functional algorithm (sorting and searching) visualization tool. 
